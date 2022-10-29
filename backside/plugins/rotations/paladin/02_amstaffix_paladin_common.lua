@@ -117,17 +117,17 @@ local ok, err = pcall(function()
     AmstLibPaladinCommonHealer.isEnabled = false
     AmstLibPaladinCommonHealer.holyShockHealAmount = 1
     AmstLibPaladinCommonHealer.flashOfLightHealAmount = 1
-    AmstLibPaladinCommonHealer.holyLightHealAmount = 1
+    ---AmstLibPaladinCommonHealer.holyLightHealAmount = 1
 
     ---@param cr AmstLibCombatRotation
     ---@return AmstLibPaladinCommonHealer
-    function AmstLibPaladinCommonHealer:new(cr, isEnabled, holyShockHealAmount, flashOfLightHealAmount, holyLightHealAmount)
+    function AmstLibPaladinCommonHealer:new(cr, isEnabled, holyShockHealAmount, flashOfLightHealAmount)---, holyLightHealAmount)
         local o = {
             cr = cr,
             isEnabled = isEnabled,
             holyShockHealAmount = holyShockHealAmount,
             flashOfLightHealAmount = flashOfLightHealAmount,
-            holyLightHealAmount = holyLightHealAmount,
+            ---holyLightHealAmount = holyLightHealAmount,
         }
         setmetatable(o, self)
         self.__index = self
@@ -236,10 +236,10 @@ local ok, err = pcall(function()
                 self.cr:printDbg("should cast holy shock on " .. unit .. "(" .. GMR.UnitName(unit) .. ") while standing")
                 GMR.Cast(amstlib.CONST.SPELL.holyShock, unit)
                 return true
-            elseif (missingHealth * 1.2 >= self.holyLightHealAmount or force) and GMR.IsCastable(amstlib.CONST.SPELL.holyLight, unit) then
-                self.cr:printDbg("should cast holy light on " .. unit .. "(" .. GMR.UnitName(unit) .. ") while standing")
-                GMR.Cast(amstlib.CONST.SPELL.holyLight, unit)
-                return true
+            ---elseif (missingHealth * 1.2 >= self.holyLightHealAmount or force) and GMR.IsCastable(amstlib.CONST.SPELL.holyLight, unit) then
+              ---  self.cr:printDbg("should cast holy light on " .. unit .. "(" .. GMR.UnitName(unit) .. ") while standing")
+               --- GMR.Cast(amstlib.CONST.SPELL.holyLight, unit)
+             ---   return true
             elseif false and (missingHealth >= self.flashOfLightHealAmount or force) and GMR.IsCastable(amstlib.CONST.SPELL.flashOfLight, unit) then
                 self.cr:printDbg("should cast flash of light on " .. unit .. "(" .. GMR.UnitName(unit) .. ") while standing")
                 GMR.Cast(amstlib.CONST.SPELL.flashOfLight, unit)
